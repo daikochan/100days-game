@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>障害物よけゲーム</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- タイトル画面 -->
+  <div id="startOverlay">
+  <h1>タップしてスタート！</h1>
+  <p>◀️▶️で移動して、🔴 障害物をよけよう！</p>
+  <p>🟡 アイテムでスコアアップ！</p>
+  <p>🟢 無敵アイテムで10秒間だけ無敵！</p>
+  <p>無敵中に🔴にぶつかるとスコアが加算！</p>
+  <p>⏱ スコアは0.6秒ごとに1点自動で加算！</p>
+  <p>📱 スマホでは画面下のボタンで操作できます</p>
+  <p>🏆 ハイスコアは保存されます！</p>
+  </div>
+
+  <!-- ゲーム画面 -->
+  <canvas id="gameCanvas" width="400" height="600"></canvas>
+
+  <!-- スマホ用操作ボタン -->
+  <div class="touch-controls">
+    <button id="leftBtn">◀</button>
+    <button id="rightBtn">▶</button>
+  </div>
+
+  <!-- BGM -->
+  <audio id="bgm" src="noraneko.mp3" loop preload="auto"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
