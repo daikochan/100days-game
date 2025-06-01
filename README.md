@@ -10,7 +10,9 @@
 - 🟢 無敵アイテムを取ると10秒間無敵になり、障害物に当たってもスコア加算！
 
 ## 公開サイト
-👉 [https://yourname.github.io/100days-game/](https://yourname.github.io/100days-game/)
+👉 [https://daikochan.github.io/100days-game/days/day01/].
+
+
 
 ## 作者
 Daisuke Tateno
