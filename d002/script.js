@@ -64,15 +64,17 @@ document.addEventListener("keydown", (e) => keys[e.key] = true);
 document.addEventListener("keyup", (e) => keys[e.key] = false);
 
 canvas.addEventListener("touchstart", (e) => {
+  e.preventDefault();  // ← スクロール防止
   const t = e.touches[0];
   const rect = canvas.getBoundingClientRect();
   touchPoint = {
     x: t.clientX - rect.left,
     y: t.clientY - rect.top
   };
-});
+}, { passive: false });  // ← これを忘れずに
 
 canvas.addEventListener("touchmove", (e) => {
+  e.preventDefault();  // ← スクロール防止
   const t = e.touches[0];
   const rect = canvas.getBoundingClientRect();
   const current = {
@@ -86,12 +88,13 @@ canvas.addEventListener("touchmove", (e) => {
     left: dx < -th, right: dx > th,
     up: dy < -th, down: dy > th
   };
-});
+}, { passive: false });
 
-canvas.addEventListener("touchend", () => {
+canvas.addEventListener("touchend", (e) => {
+  e.preventDefault();  // 念のため
   touchDir = { up: false, down: false, left: false, right: false };
   touchPoint = null;
-});
+}, { passive: false });
 
 function getMaxSpeed(size) {
   const minSpeed = 1.7;
