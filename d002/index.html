@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>いわしの成り上がり</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #87CEFA; /* 空色背景 */
+      display: flex;
+      align-items: center;  /* 縦中央 */
+      justify-content: center;  /* 横中央 */
+    }
+
+    #gameCanvas {
+      background: white;
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      aspect-ratio: 16 / 9; /* スマホでも縦横比維持 */
+      display: block;
+    }
+
+    #rotateNotice {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      font-size: 24px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- スマホ縦向き注意メッセージ -->
+  <div id="rotateNotice">スマホを横向きにしてください📱↔️</div>
+
+  <!-- ゲームキャンバス -->
+  <canvas id="gameCanvas" width="640" height="360"></canvas>
+
+  <!-- スクリプトの読み込み -->
+  <script type="module" src="script.js"></script>
+
+  <!-- スマホ向け横画面警告 -->
+  <script>
+    function checkOrientation() {
+      const notice = document.getElementById('rotateNotice');
+      if (window.innerHeight > window.innerWidth) {
+        notice.style.display = 'flex'; // 縦画面なら警告表示
+      } else {
+        notice.style.display = 'none'; // 横画面なら非表示
+      }
+    }
+
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+    window.addEventListener('load', checkOrientation);
+  </script>
+</body>
+</html>
+
+
