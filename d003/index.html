@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>五目並べ（CPU対戦）</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- タイトル画面 -->
+  <div id="scene-title" class="scene active">
+    <h1>五目並べ</h1>
+    <p>CPUと五目並べ！勝てるかな？</p>
+    <button id="start-button">はじめる</button>
+  </div>
+
+  <!-- 難易度選択画面 -->
+  <div id="scene-select" class="scene">
+    <h2>難易度を選んでください</h2>
+    <div class="difficulty-buttons">
+      <div>
+        <p class="difficulty-explanation">かんたん：小学生でも勝てるかも！</p>
+        <button data-level="easy">かんたん</button>
+      </div>
+      <div>
+        <p class="difficulty-explanation">ふつう：一般の大人におすすめ</p>
+        <button data-level="normal">ふつう</button>
+      </div>
+      <div>
+        <p class="difficulty-explanation">むずかしい：勝てたら天才級！</p>
+        <button data-level="hard">むずかしい</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ゲーム画面 -->
+  <div id="scene-game" class="scene">
+    <div class="game-header">
+      <button id="back-to-select">← 難易度に戻る</button>
+      <div id="in-game-message">あなたの番です</div>
+    </div>
+    <canvas id="board" width="600" height="600"></canvas>
+  </div>
+
+
+  <!-- 結果表示 -->
+  <div id="scene-result" class="scene">
+    <h2 id="result-text"></h2>
+    <p id="result-comment"></p>
+    <button id="retry-button">もう一回</button>
+    <button id="back-button">タイトルへ</button>
+  </div>
+
+  <!-- メインスクリプト -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

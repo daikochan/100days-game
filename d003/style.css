@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Noto Sans JP', sans-serif;
+  background: url('assets/images/park_bg.png') no-repeat center center fixed;
+  background-size: cover;
+  overscroll-behavior: contain;
+  text-align: center;
+}
+
+/* 画面切り替え用 */
+.scene {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.scene.active {
+  display: flex;
+}
+
+/* ゲームヘッダー（戻るボタン＋番表示） */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 600px;
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+
+/* 盤面の見た目（やわらかい色＋浮かび感） */
+canvas {
+  width: 100vw;
+  height: 100vw;
+  max-width: 600px;
+  max-height: 600px;
+  background: rgba(255, 248, 220, 0.95);
+  border: 2px solid #444;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  touch-action: none;
+  margin: 20px 0;
+}
+
+/* ボタンの共通デザイン */
+button {
+  padding: 12px 24px;
+  margin: 10px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #81c784, #a5d6a7);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, background 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #66bb6a, #aed581);
+}
+
+.difficulty-buttons button {
+  width: 200px;
+}
+
+/* 難易度説明テキスト */
+.difficulty-explanation {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* ゲーム中の表示メッセージ（上部に移動） */
+#in-game-message {
+  font-size: 1.1em;
+  color: #333;
+}
+
+/* 戻るボタン（難易度選択へ） */
+#back-to-select {
+  font-size: 0.9em;
+  background: #fff;
+  color: #333;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+}
+#back-to-select:hover {
+  background: #f1f1f1;
+}
+
+/* 勝敗コメント表示 */
+#result-comment {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+/* 横持ちスマホで警告表示 */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  body::before {
+    content: "スマホは縦向きでプレイしてください 📱";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #ffffffee;
+    color: #444;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 40vh;
+    z-index: 9999;
+  }
+
+  .scene {
+    display: none !important;
+  }
+}
