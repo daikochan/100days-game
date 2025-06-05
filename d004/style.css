@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Noto Sans JP', sans-serif;
+  overscroll-behavior: contain; /* ✅ これで更新防止 */
+  background-color: black;
+  touch-action: none; /* ✅ スクロール防止 */
+}
+
+
+/* 共通レイアウト */
+.scene {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.scene.active {
+  display: flex;
+}
+
+/* 背景画像切り替え（JSでbodyにクラスをつける） */
+body.start-bg {
+  background: url('assets/images/startbg.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+body.game-bg {
+  background: url('assets/images/bg.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* canvasゲーム画面 */
+canvas#gameCanvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  touch-action: none; /* スマホ誤操作防止 */
+}
+
+/* スコア表示（ゲーム画面上部） */
+#scoreDisplay {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-around;
+  pointer-events: none;
+  text-shadow: 2px 2px 4px #000;
+}
+
+/* ボタン */
+button {
+  font-size: 1.5em;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f66;
+  color: white;
+  box-shadow: 2px 2px 6px #000;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #d44;
+}

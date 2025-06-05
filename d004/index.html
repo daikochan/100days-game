@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ボムキャラ仕分けゲーム</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- スタート画面 -->
+  <div id="startScene" class="scene active">
+    <h1>🎯 ボムキャラ仕分けゲーム</h1>
+    <p>
+      赤と青のキャラをそれぞれの<br>
+      安全地帯（左上・右上）に運ぼう！<br>
+      10秒以内に仕分けしないと爆発！<br>
+      仕分け成功でスコア+1🎉
+    </p>
+    <button id="startButton">スタート</button>
+  </div>
+
+  <!-- ゲーム画面 -->
+  <div id="gameScene" class="scene">
+    <canvas id="gameCanvas"></canvas>
+    <div id="scoreDisplay">
+      <span>スコア: <span id="score">0</span></span>
+      <span>ハイスコア: <span id="highScore">0</span></span>
+    </div>
+  </div>
+
+  <!-- リザルト画面 -->
+  <div id="resultScene" class="scene">
+    <h2>ゲーム終了！</h2>
+    <p>最終スコア: <span id="finalScore">0</span></p>
+    <p>ハイスコア: <span id="highScoreResult">0</span></p> <!-- 追加 -->
+    <button id="retryButton">もう一度</button>
+  </div>
+
+  <!-- スクリプト読み込み -->
+  <script src="js/sound.js"></script>
+  <script src="js/scene.js"></script>
+  <script src="js/bomb.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/judge.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
