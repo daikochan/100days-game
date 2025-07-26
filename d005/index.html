@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>道をつくる風・一筆パズル</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- 404回避のダミーファビコン -->
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <!-- ====== メニュー（難易度＋ルール） ====== -->
+  <div id="menu-screen">
+    <h1>道をつくる</h1>
+
+    <!-- ★ここを自由に編集してください -->
+    <details open class="rules">
+      <summary>ルール（遊び方）</summary>
+      <ol>
+        <li>左上の<strong>S</strong>から右下の<strong>G</strong>を目指します。</li>
+        <li><strong>同じマスは基本1回だけ</strong>通れます。直前のマスへ戻るのはOKです。</li>
+        <li>盤の<strong>左側と上側の数字</strong>は、その行・列で<strong>通るマス数の「現在/目標」</strong>です（例：<code>3/5</code>）。<strong>目標を超える手は無効</strong>です。</li>
+      </ol>
+    </details>
+
+    <div class="difficulty">
+      <button data-level="easy"    class="btn diff">Easy</button>
+      <button data-level="normal"  class="btn diff">Normal</button>
+      <button data-level="hard"    class="btn diff">Hard</button>
+      <button data-level="extreme" class="btn diff danger">激ムズ</button>
+    </div>
+  </div>
+
+  <!-- ====== ゲーム画面 ====== -->
+  <div id="game-screen" class="app" style="display:none;">
+    <!-- 左：Dパッド（スマホは独立カラム） -->
+    <aside class="left">
+      <div id="dpad" class="dpad" aria-label="方向キー">
+        <button class="key dir-up"    data-dir="up"    aria-label="上"></button>
+        <button class="key dir-left"  data-dir="left"  aria-label="左"></button>
+        <button class="key dir-right" data-dir="right" aria-label="右"></button>
+        <button class="key dir-down"  data-dir="down"  aria-label="下"></button>
+      </div>
+    </aside>
+
+    <!-- 中央：HUD + 盤面 -->
+    <main class="center">
+      <div class="hud">
+        <button id="btn-bgm" class="bgm-btn" aria-pressed="true" title="BGMの切り替え">♪ BGM On</button>
+        <div id="timer">Time: 0.0s</div>
+      </div>
+      <div class="board-wrap">
+        <canvas id="game-canvas"></canvas>
+      </div>
+    </main>
+
+    <!-- 右：操作パネル（盤面右の白パネル内） -->
+    <aside class="right">
+      <div class="panel">
+        <button id="btn-reset" class="btn">リセット</button>
+        <button id="btn-new"   class="btn">再生成</button>
+        <button id="btn-back"  class="btn secondary">難易度選択</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- スクリプト -->
+  <script type="module" src="game.js" defer></script>
+  <script type="module" src="input.js" defer></script>
+</body>
+</html>

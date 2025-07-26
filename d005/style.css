@@ -1,0 +1,195 @@
+/* ===== リセット & スクロール抑止 ===== */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+  user-select: none;
+  background:
+    radial-gradient( rgba(255,255,255,0.25) 1px, transparent 1px ) 0 0/24px 24px,
+    linear-gradient(180deg, #f7f8fb, #ecf1f9);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
+}
+/* 100vhハック */
+:root { --vh: 1vh; }
+body { height: calc(var(--vh) * 100); }
+
+/* ===== メニュー画面 ===== */
+#menu-screen {
+  max-width: 800px;
+  margin: 0 auto;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 16px;
+  padding: 20px;
+}
+#menu-screen h1 { margin: 8px 0 0; text-align: center; }
+.rules { background: rgba(255,255,255,0.7); padding: 12px 16px; border-radius: 12px; }
+.rules summary { font-weight: 600; margin-bottom: 8px; cursor: pointer; }
+.rules ol { margin: 8px 0 0 20px; }
+.difficulty { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+/* ===== ボタン ===== */
+.btn {
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 0;
+  background: #2f6de1;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,.12);
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.2;
+}
+.btn:hover { filter: brightness(1.05); }
+.btn:active { transform: translateY(1px); }
+.btn.secondary { background: #64748b; }
+.btn.danger { background: #c62828; }
+.btn.diff { min-width: 120px; }
+
+/* ===== アプリレイアウト（PC基本） ===== */
+.app {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(90px, 18vw) 1fr minmax(110px, 22vw);
+  grid-template-rows: 100%;
+  gap: 6px;
+  width: 100%;
+  height: calc(var(--vh) * 100);
+  padding: 6px;
+}
+.left  {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: transparent;
+  z-index: 15;
+}
+.center{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.right { display: flex; align-items: center; justify-content: center; }
+.panel { display: grid; gap: 8px; background: rgba(255,255,255,0.9); padding: 12px; border-radius: 14px; }
+
+/* HUD（右寄せ） */
+.hud {
+  width: 100%;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;  /* 右寄せのまま */
+  gap: 8px;                   /* タイマーとBGMボタンの間隔 */
+  margin-bottom: 6px;
+}
+#timer { font-weight: 700; }
+/* BGMトグル（小さめの丸ボタン） */
+.bgm-btn{
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 0;
+  border-radius: 999px;
+  background: #e6efff;
+  color: #1e3a8a;
+  box-shadow: 0 1px 6px rgba(0,0,0,.12);
+  cursor: pointer;
+}
+.bgm-btn.off{ opacity:.6; }
+
+/* 盤面ラッパー（中央寄せ） */
+.board-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* キャンバス */
+#game-canvas {
+  display: block;
+  border: 2px solid #222;
+  background: rgba(255,255,255,0.75);
+  touch-action: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.15);
+}
+
+/* ===== Dパッド（PCは十字） ===== */
+.dpad {
+  --dpad-size: 160px;
+  width: var(--dpad-size);
+  height: var(--dpad-size);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  background: transparent;
+  box-shadow: none !important;
+}
+.dpad::before, .dpad::after { content: none !important; }
+.dpad .key {
+  width: 100%; height: 100%;
+  border-radius: 12px; border: 0;
+  background: rgba(17,17,17,0.9);
+  box-shadow: inset 0 0 12px rgba(255,255,255,.08), 0 6px 12px rgba(0,0,0,.25);
+}
+.dpad .key:active { transform: translateY(1px); }
+.dpad .dir-up    { grid-area: 1 / 2; }
+.dpad .dir-left  { grid-area: 2 / 1; }
+.dpad .dir-right { grid-area: 2 / 3; }
+.dpad .dir-down  { grid-area: 3 / 2; }
+
+/* ===== モバイル（<=900px） ===== */
+@media (max-width: 900px) {
+  .app {
+    --dpad-col: clamp(110px, 30vw, 150px);
+    grid-template-columns: var(--dpad-col) 1fr minmax(120px, 34vw);
+  }
+  .left { align-items: flex-end; justify-content: center; background: transparent !important; }
+  .left .dpad {
+    width: calc(var(--dpad-col) - 6px);
+    aspect-ratio: 1 / 1;
+    height: auto;
+    gap: 6px;
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .left .dpad .key { width: 100%; height: 100%; }
+
+  .right {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding-right: max(6px, env(safe-area-inset-right));
+  }
+  .right .panel {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;     /* 3ボタンを縦方向で中央配置 */
+    gap: 10px;
+
+    width: 100%;
+    max-width: 220px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(4px);
+    padding: 12px 10px;
+    margin-left: 18px;           /* 盤面との間隔 */
+    max-height: calc(100% - 16px);
+    overflow: auto;
+  }
+  .right .panel .btn {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 360px) { .right .panel { max-width: 200px; } }
